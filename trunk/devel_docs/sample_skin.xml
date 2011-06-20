@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Skin
+        name="Default Skin"
+        description=""
+        version="1.0">
+
+    <MainTemplate
+            file="main.skin"
+            header="header.skin"
+            footer="footer.skin">
+        <Style file="main.css" />
+        <Style file="another.css" />
+        <JavaScript file="main.js" />
+    </MainTemplate>
+
+    <!-- standard pages -->
+    <Page name="home"           file="home.page.skin" />
+    <Page name="contact"        file="contact.page.skin" />
+    <Page name="login"          file="login.page.skin" />
+    <Page name="my_account"     file="my_account.page.skin" />
+    <Page name="news_list"      file="news_list.page.skin" />
+    <Page name="news_article"   file="news_article.page.skin" />
+    <Page name="cart"           file="cart.page.skin" />
+    <Page name="category"       file="category.page.skin" />
+    <Page name="product"        file="product.page.skin" />
+    <Page name="checkout"       file="checkout.page.skin" />
+    <Page name="wishlist"       file="wishlist.page.skin" />
+
+    <!-- other user pages -->
+    <Page name="how_to_buy"     file="how_to_buy.page.skin"     urlName="how_to_buy" />
+    <Page name="how_to_pay"     file="how_to_pay.page.skin"     urlName="how_to_pay" />
+    <Page name="terms"          file="terms.page.skin"          urlName="terms_and_conditions" />
+
+    <!-- other included default template blocks -->
+    <Block name="product"       file="product.block.skin" />
+    <Block name="category"      file="category.block.skin" />
+    <Block name="category_tree" file="category_tree.block.skin" />
+
+
+</Skin>

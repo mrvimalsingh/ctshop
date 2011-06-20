@@ -1,0 +1,43 @@
+#####################################################
+#   COMPLETE FEATURE LIST FOR PROJECT "CT-Shop":    #
+#####################################################
+
+FRONTEND:
+1. Front page
+2. Categories - bar
+3. Filters
+4. Product page
+5. Static pages
+6. User login
+7. Wish-list
+8. Order management
+9. News module
+
+BACKEND:
+1. Customized menu for each user type
+2. Status bar
+3. Notifications
+4. Manage Static pages
+5. Manage Products
+6. Manage Categories
+7. Manage Users (front & backend)
+8. Manage Banners
+9. Sponsored links in the administration
+10. Manage Orders
+11. Manage currencies
+12. Import/export currency rates (also includes already implemented currency fetching scripts)
+
+GENERAL (both frontend and backend):
+1. Customizable design
+2. Multi-language
+3. Multi-currency
+4. Support review for any product/category
+5. Payment method / transport and packaging information
+6. Newsletter
+
+WEB-service (for third party clients):
+1. categories ws
+2. products ws
+3. prices ws
+4. orders ws
+5. auth module

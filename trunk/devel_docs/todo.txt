@@ -1,0 +1,34 @@
+Immediate todo list:
+
+Review what's to be done.
+
+Skins mechanism:
+skin_folder
+    - skin_name
+        - skin.xml (configuration data)
+        - templates
+        - css
+        - images
+        - js
+
+1. Broken links on the home page.
+2. Newsletter
+3. Product notifications mechanism
+4. Skins
+5. Similar products
+6. Reports
+7. Translations.
+8. Sales page.
+
+Product Discounts:
+    a. discount categories
+        start date
+        end date
+        type (percent, quantity... think of other discount types)
+        value
+        -
+        quantity discounts may be multiple e.g: 100 -> 10%, 200 -> 15%
+            when this is the case only the highest must be considered
+    b. select discount category and drag products to it...
+        the default values of the start/end date type and value can be individually overridden by any product
+
