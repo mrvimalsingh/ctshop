@@ -1,0 +1,62 @@
+Important modules of the project (and responsibilities for each):
+
+1. INSTALLER MODULE:
+    - version check
+    - update scripts between versions
+    - database installer/updater
+    - automatic updater
+
+2. LANGUAGE MODULE:
+    - language configuration
+    - one default language
+        (set at startup and when changed everything
+        has to check for valid data in that language)
+    - every other module must handle how the data for the selected language is fetched
+        (the recommended way is to have a table column for each language:
+            - it's more scalable and fast
+            - e.g: some_field_en, some_field_de)
+
+3. CURRENCY MODULE:
+    - currency configuration
+    - one default currency set throughout the website
+    - the product module must always save the currency in which the price is set
+    - conversions are done based on what the administrator set's in the backend
+    - rates must be imported, manually entered every day or have a script handle it,
+        or have an average for a given period
+    - a warning sign must be present on the site and other clients to indicate that
+        calculations were based on a specific rate and it might change when the order is completed
+
+4. Product Module
+    - product
+    - categories
+    - features
+    - prices
+
+5. PRODUCT FILTERING MODULE:
+    - filter based on:
+        - category
+        - price range
+        - product feature
+
+6. Sales module
+    - order tracking (client & admin side)
+    - shipping & payment options
+
+7. User & Auth Module (frontent & backend)
+    - auth
+    - wishlist
+
+8. News Module
+
+9. Static module
+
+10. Reporting module
+
+11. Newsletter module
+    - create and schedule newsletter sending to clients and newsletter subscribers
+
+12. ThirdParty WS Module:
+    - expose all public information via publicly accessible web service
+    - expose all admin information via secured webservice
+
+??? Social connect module (fb+twitter+other social networks) (not as important)

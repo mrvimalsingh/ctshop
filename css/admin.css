@@ -1,0 +1,333 @@
+html{
+		overflow-y:scroll;
+}
+
+body {
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+	color: #666666;
+	background: #fff url(../img/bg-admin.gif);
+	background-repeat: repeat-x;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+a img {
+	border: none;
+}
+
+.infoUser {
+	color: #fff;
+}
+
+.infoUser a {
+	color: #fdef7a;
+	text-decoration: underline;
+}
+
+td {
+	color: black;
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Lucida, Geneva,
+		Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+.loginLabel{
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Lucida, Geneva,
+		Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	color: #037d8a;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.loginTitle{
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Lucida, Geneva,
+		Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	color: #ffffff;
+	font-weight: bold;
+	margin-left: 10px;
+}
+
+fieldset legend {
+	font-weight:bold;
+}
+
+input {
+	font-family: Helvetica, Arial;
+	font-size: 12px;
+}
+
+.pagination {
+	padding: 2px;
+}
+
+.pagination ul {
+	margin: 0;
+	padding: 0;
+	text-align: left; /*Set to "right" to right align pagination interface*/
+	font-size: 16px;
+}
+
+.pagination li {
+	list-style-type: none;
+	display: inline;
+	padding-bottom: 1px;
+}
+
+.pagination a, .pagination a:visited {
+	padding: 0 5px;
+	border: 1px solid #9aafe5;
+	text-decoration: none;
+	color: #2e6ab1;
+}
+
+.pagination a:hover, .pagination a:active {
+	border: 1px solid #2b66a5;
+	color: #000;
+	background-color: #FFFF80;
+}
+
+.pagination a.currentpage {
+	background-color: #2e6ab1;
+	color: #FFF !important;
+	border-color: #2b66a5;
+	font-weight: bold;
+	cursor: default;
+}
+
+.pagination a.disablelink, .pagination a.disablelink:hover {
+	background-color: white;
+	cursor: default;
+	color: #929292;
+	border-color: #929292;
+	font-weight: normal !important;
+}
+
+.pagination a.prevnext {
+	font-weight: bold;
+}
+/*
+.buton {
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Lucida, Geneva,
+		Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-align: center;
+	float: none;
+	background-color: #ece9d8;
+	height: 20px;
+	white-space:nowrap;
+	background-color: #ece9d8;
+}
+
+.buton a {
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Lucida, Geneva,
+		Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	border: 1px solid #c0c0c0;
+	color: #000000;
+	text-align: center;
+	float: none;
+	background-color: #ece9d8;
+	height: 20px;
+	white-space:nowrap;
+	background-color: #ece9d8;
+}
+
+.buton a:hover{
+	color: #0559c8;
+}
+
+.buton input:hover {
+	color: #0559c8;
+}
+*/
+#contentcontainer1 {
+	border: 1px solid #ddd;
+	width: 530px;
+	height: 145px;
+	background-color: #efefef;
+	margin: 0;
+	margin-top: 5px;
+	margin-left: 165px;
+	padding: 0;
+}
+
+#contentscroll1 {
+	top: 10px;
+	left: 10px;
+	width: 530px;
+	height: 145px;
+	clip: rect(0, 530px, 141px, 0);
+	overflow: auto;
+	margin: 0;
+	padding: 0;
+}
+
+#contentcontainer1 {
+	border: 1px solid #ddd;
+	width: 420px;
+	height: 38px;
+	background-color: #efefef;
+	margin: 0;
+	margin-top: 5px;
+	margin-left: 170px;
+	padding: 0;
+	padding-left: 10px;
+	list-style-type: sqare;
+}
+
+#contentscroll1 {
+	top: 10px;
+	left: 15px;
+	width: 400px;
+	height: 38px;
+	clip: rect(0, 530px, 141px, 0);
+	overflow: auto;
+	margin: 0;
+	padding: 0;
+}
+
+textarea {
+	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Lucida, Geneva,
+		Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	background-color: #ffffe1;
+	border-color: #e0e0e0;
+	border-style: inset;
+	border-width: 1px;
+	color: #444444;
+	float: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#categoryTd {
+	background-color: #037d8a;
+	color: #fff;
+	padding: 3px;
+}
+
+.checkboxStyle {
+	background: none;
+	border: none;
+}
+
+
+.slidedoormenu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 190px; /* width of menu (don't forget to add border with below!) */
+}
+
+.slidedoormenu li{
+	border-bottom: 1px solid #885b5c; /* Gray border beneath each menu item */
+	margin: 3;
+	padding: 0;
+}
+
+.slidedoormenu li ul li {
+	border-bottom: none;
+	margin: 3px;
+	padding: 0;
+	border: 1px solid white;
+}
+
+.slidedoormenu li ul li a {
+	border-bottom: none;
+	margin: 0px;
+	padding: 0px;
+	color: black;
+}
+
+.slidedoormenu li a {
+	background: white url(media/vstrip.gif) repeat-y left top; /* Background image positioned to the left(v) top(h) corner initially */
+	font: bold 11px "Lucida Grande", "Trebuchet MS", Verdana;
+	display: block;
+	color: black;
+	width: auto;
+	border-bottom: 1px solid white; /* White border beneath each menu item link, to add depth */
+	padding: 5px 0; /* Vertical (top/bottom) padding for each menu link */
+	text-indent: 8px;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
+.slidedoormenu li a:hover {
+	background-position: -387px 0; /* Shift background image horizontally 387px, or the start of the 2nd background image */
+	color: red;
+	margin: 0;
+	padding: 0;
+}
+
+.slidedoormenu li.lastitem, .slidedoormenu li.lastitem a {
+	border-bottom-width: 0; /* For last menu item within menu, remove bottom border */
+}
+
+.slidedoormenu li.lastitem a {
+	padding: 8px 0; /* increase vertical border of last menu link by 2px (default is padding: 7px 0) to account for removed border width */
+}
+
+
+<!--[if IE]>
+
+.slidedoormenu li a { /* Menu link width value for IE */
+	width: 100%;
+}
+
+<![endif]-->
+
+/* Side Navigation
+--------------------------------------- */
+  
+.sideNav ul{
+  margin: 0px;
+  padding-top: 0px;
+  padding-right: 20px;
+  padding-bottom: 0px;
+  padding-left: 20px;
+  }
+
+.sideNav li {
+  display: block;
+  list-style: none;
+  margin: 0px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #CCCCCC;
+  padding: 0px;
+  }
+  
+.sideNav li a, .sideNav li a:link{
+  background-image: url(../img/arrow.gif);
+  background-position: 6px 10px;
+  background-repeat: no-repeat;
+  text-decoration: none;
+  margin-top: 1px;
+  margin-right: 0px;
+  margin-bottom: 1px;
+  margin-left: 0px;
+  padding:6px;
+  }
+  
+.sideNav li a:hover{
+  color: #00958F;
+  background-color: #FFFFFF;
+  background-image: url(../img/arrow_hov.gif);
+  background-repeat: no-repeat;
+  background-position: 6px 10px;
+   text-decoration: none;
+  margin-top: 1px;
+  margin-right: 0px;
+  margin-bottom: 1px;
+  margin-left: 0px;
+  padding:6px;
+  }
+  
