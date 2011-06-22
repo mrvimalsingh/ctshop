@@ -1,0 +1,16 @@
+#If you're new to this project you can start here.
+
+= Introduction =
+
+This page will get you started in downloading all necessary files, setting up your environment, launch the application, standards we try to keep in the project. Links to all relevant wiki pages.
+
+= A bit about the project =
+
+CT-Shop is built using CodeIgniter php MVC framework, so any experience you might have with CodeIgniter or MVC will come in handy. The project also uses a few open source libraries like php.activerecord. These will be discussed in other topics.
+
+= Initial project setup =
+
+  # First things first you have to check out the code from svn (If you don't know how to do that, you should probably study a bit more about software development, but nevertheless you're welcome to join the project).
+  # After checking out the code one of the most important things you should do is to set up the database for the application. If you downloaded the source you might have a configuration file that's not pointing to the right database (this will be changed in the future). This must be deleted before any other action. The file is located under: `...project_root/basecamp/application/config/site_config.php`. After that when you access the app it should redirect you to the database setup utility.
+  # If you get an error at this stage you might not have the rewrite module loaded for apache, or another common error might be that you have to enable php short-tags. TODO: link to a tutorial explaining what each of those mean and how to fix the problem.
+  # You should now be able to get to the admin page and put some content.
