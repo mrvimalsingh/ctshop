@@ -21,6 +21,7 @@ class Activerecord {
 
     function __construct() {
         // Load database configuration from CodeIgniter
+        // TODO make this load our custom configuration instead of the codeigniter default
         include APPPATH.'/config/database.php';
         // Get connections from database.php
         $dsn = array();

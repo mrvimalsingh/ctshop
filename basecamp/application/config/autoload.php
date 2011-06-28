@@ -38,7 +38,7 @@
 |
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
-$autoload['libraries'] = array('parser');
+$autoload['libraries'] = array('parser', 'activerecord');
 
 /*
 | -------------------------------------------------------------------
