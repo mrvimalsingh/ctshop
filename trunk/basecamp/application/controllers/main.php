@@ -27,9 +27,10 @@ class Main extends MY_Controller {
 									WHERE 
 										`bl`.`lang_id` = '".$this->lang_id."' ");
 		$data["banners"] = $query->result_array();
-		
-		$this->load->model('Productmodel');
-		$data["featured_prods"] = $this->Productmodel->getProductList(0, array(), 0, 6, "`p`.`featured` = 'y'");
+
+        // TODO have to see where else this is used and implement functionalities that have been left out since I changed to php.activerecord
+//		$this->load->model('Productmodel');
+//		$data["featured_prods"] = $this->Productmodel->getProductList(0, array(), 0, 6, "`p`.`featured` = 'y'");
 		
 		$query = $this->db->query("SELECT 
 										id, title, keywords, content, 
