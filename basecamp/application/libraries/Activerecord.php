@@ -6,10 +6,10 @@
  * Time: 1:27 AM
  * To change this template use File | Settings | File Templates.
  */
- 
+
 /**
-* Init for php.activerecord
-*/
+ * Init for php.activerecord
+ */
 
 // Load php.activerecord
 require_once APPPATH.'/libraries/php-activerecord/ActiveRecord.php';
@@ -21,27 +21,25 @@ class Activerecord {
 
     function __construct() {
         // Load database configuration from CodeIgniter
-        // TODO make this load our custom configuration instead of the codeigniter default
-        include APPPATH.'/config/database.php';
+        include APPPATH.'/config/site_config.php';
         // Get connections from database.php
         $dsn = array();
-        if ($db) {
-            foreach ($db as $name => $db_values) {
-            	// Convert to dsn format
-            	$dsn[$name] = $db[$name]['dbdriver'] .
-            		'://'   . $db[$name]['username'] .
-            		':'     . $db[$name]['password'] .
-            		'@'     . $db[$name]['hostname'] .
-            		'/'     . $db[$name]['database'];
-            }
+        if ($config["db"]) {
+            // Convert to dsn format
+            $dsn["default"] = $config["db"]['dbdriver'] .
+                              '://'   . $config["db"]['username'] .
+                              ':'     . $config["db"]['password'] .
+                              '@'     . $config["db"]['hostname'] .
+                              '/'     . $config["db"]['database'];
         }
+        $active_group = "default";
 
         // Initialize ActiveRecord
         ActiveRecord\Config::initialize(function($cfg) use ($dsn, $active_group){
-            $cfg->set_model_directory(APPPATH.'/models');
-            $cfg->set_connections($dsn);
-            $cfg->set_default_connection($active_group);
-        });
+                $cfg->set_model_directory(APPPATH.'/models');
+                $cfg->set_connections($dsn);
+                $cfg->set_default_connection($active_group);
+            });
 
     }
 }

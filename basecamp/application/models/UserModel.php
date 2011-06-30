@@ -10,11 +10,14 @@
 class UserModel extends ActiveRecord\Model {
     static $table_name = 'users';
 
-    public static function authenticateUser($user_name, $pw) {
+    public static function authenticateUser($user_name, $pw, $salt) {
         $user = UserModel::find_by_username($user_name);
-        // TODO P1 implement a more secure way to authenticate
-        if ($user->password == $pw) {
-            return $user; // return the user and do whatever with it
+        if (isset($user->password)) {
+            // calculate the password hash
+            $calculated_hash = sha1($user->password.sha1($salt));
+            if ($calculated_hash == $pw) {
+                return $user; // return the user and do whatever with it
+            }
         }
         return false;
     }
