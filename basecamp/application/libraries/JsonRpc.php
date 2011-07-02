@@ -26,6 +26,11 @@ class JsonRpc {
         global $HTTP_RAW_POST_DATA;
         // parse json input
         $input = json_decode($HTTP_RAW_POST_DATA);
+        if ($input === null) {
+            if (isset($_POST["jsonrpc"])) {
+                $input = json_decode($_POST["jsonrpc"]);
+            }
+        }
 
         if ($input !== null && (is_object($input) || is_array($input))) {
             if (is_array($input)) {

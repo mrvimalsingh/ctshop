@@ -10,10 +10,12 @@
 class Test extends Controller {
 
     function index() {
-        $this->load->library('activerecord');
-        echo "test fjdsl ajfdsf aieowjifo jid sjfioasj ieo";
-        $users = UserModel::all();
-        print_r($users);
+//        $this->load->library('activerecord');
+//        echo "test fjdsl ajfdsf aieowjifo jid sjfioasj ieo";
+//        $users = UserModel::all();
+//        print_r($users);
+
+        $this->load->view("test");
     }
 
 }
