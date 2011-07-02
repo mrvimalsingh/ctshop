@@ -7,8 +7,7 @@
  * detailed WS documentation coming soon...
  */
 
-// TODO this might be refactored (maybe extract the WS part and make it a library so other controllers might implement other webservices and/or split WS in multiple classes that handle different parts of the backend)
-class ShopWs extends Controller {
+class Webservices extends Controller {
 
     var $errorCode = 0;
     var $errorMessage = "";
@@ -18,26 +17,27 @@ class ShopWs extends Controller {
     }
 
     function index() {
-
+        echo "you have to specify which webservice you're going to use";
     }
 
     function jsonrpc($ws = null) {
 
         $webservices = array(
             "products" => "WsProducts",
+            "categories" => "WsCategories",
             "general" => "WsGeneral",
             "user" => "WsUser",
             "orders" => "WsOrders"
         );
 
         $this->load->library('JsonRpc');
-        if ($ws == null) {
+        if ($ws == null || $ws == "") {
             $this->jsonrpc->registerHandlerClass($this);
         } else {
             if ($webservices[$ws]) {
                 $handlerClassName = $webservices[$ws];
                 $handlerClassNameLc = strtolower($handlerClassName);
-                $this->load->library($handlerClassName);
+                $this->load->library('webservice/'.$handlerClassName);
                 $this->jsonrpc->registerHandlerClass($this->$handlerClassNameLc);
             } else {
                 echo "Unknown webservice: ".$ws;
@@ -54,6 +54,15 @@ class ShopWs extends Controller {
             $result[] = $this->_createArrayFromModel($lang, array("id", "code", "name", "default", "admin_default"));
         }
         return $result;
+    }
+
+    function check_user_logged_in($params) {
+        $this->load->library('session');
+        return array("user_id" => $this->session->userdata('user_id'));
+    }
+
+    function check_header() {
+        return getallheaders();
     }
 
     function subtract($params) {
