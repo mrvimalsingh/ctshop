@@ -5,7 +5,7 @@ function makeJsonRpcCall(group, method, params, callback) {
         "method":method,
         "params":params
     };
-    $.post(baseUri+'webservice/shopws/jsonrpc/'+group,
+    $.post(baseUri+'webservices/jsonrpc/'+group,
             {'jsonrpc':JSON.stringify(payload)},
             function(data) {
                 callback(data);
