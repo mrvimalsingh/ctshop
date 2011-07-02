@@ -16,6 +16,14 @@ class WsCategories {
         return CategoryModel::getAllCategoriesRecursive();
     }
 
+    function getCategoriesForParent($params) {
+        return CategoryModel::getCategoriesForParent($params->parent_id);
+    }
+
+    function getCategoriesSimple($params) {
+        return CategoryModel::getSimpleCategories();
+    }
+
     function getCategory($params) {
         // TODO check language if is set to be valid... and throw invalid params if not
         if (!is_object($params)) {

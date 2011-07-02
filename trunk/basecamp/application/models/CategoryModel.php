@@ -16,9 +16,10 @@ class CategoryModel extends Activerecord\Model {
      * @static
      * @param null $parent_id
      * @param null $language_id if this is left blank the default language will be selected to place in the category object
+     * @param bool $rec if this is set to false it will not recurse (default true)
      * @return void
      */
-    static function getAllCategoriesRecursive($parent_id = null, $language_id = null) {
+    static function getAllCategoriesRecursive($parent_id = null, $language_id = null, $rec = true) {
         // if the language selected is null we must load the default language
         if ($language_id == null) {
             $language_obj = LanguageModel::getDefault();
@@ -44,9 +45,11 @@ class CategoryModel extends Activerecord\Model {
                 }
                 $cat["lang"] = $langArray;
                 // get subcategories
-                $subcategories = CategoryModel::getAllCategoriesRecursive($cat["id"], $language_id);
-                if ($subcategories != null) {
-                    $cat["subcategories"] = $subcategories;
+                if ($rec) {
+                    $subcategories = CategoryModel::getAllCategoriesRecursive($cat["id"], $language_id);
+                    if ($subcategories != null) {
+                        $cat["subcategories"] = $subcategories;
+                    }
                 }
 
                 $categories[] = $cat;
@@ -54,6 +57,10 @@ class CategoryModel extends Activerecord\Model {
             return $categories;
         }
         return null;
+    }
+
+    static function getCategoriesForParent($parent_id = null, $language_id = null) {
+        return CategoryModel::getAllCategoriesRecursive($parent_id, $language_id, false);
     }
 
     static function getCategoryArrayWithLanguages($category_id, $language_id = null) {
@@ -80,6 +87,20 @@ class CategoryModel extends Activerecord\Model {
             return $cat;
         }
         return null;
+    }
+
+    function getSimpleCategories($language_id = null) {
+        if ($language_id == null) {
+            $language_obj = LanguageModel::getDefault();
+            $language_id = $language_obj->id;
+        }
+        $categories = CategoryModel::all();
+        $resultArr = array();
+        foreach ($categories as $cat) {
+            $category_lang = CategoryLangModel::find(array('conditions' => 'category_id = '.$cat->id.' AND lang_id = '.$language_id));
+            $resultArr[] = array($cat->id, $category_lang->name);
+        }
+        return $resultArr;
     }
 
     function loadFromObject($category) {

@@ -48,6 +48,7 @@
                     <LI><A href="<?php echo site_url("admin/productReviews"); ?>">Administrare reviews</A></LI>
                     <LI><A href="<?php echo site_url("admin/news"); ?>">Administrare noutati</A></LI>
                     <LI><A href="<?php echo site_url("admin/categories"); ?>">Administrare categorii</A></LI>
+                    <LI><A href="<?php echo site_url("admin/categories_new"); ?>">Administrare categorii NEW</A></LI>
                     <LI><A href="<?php echo site_url("admin/products"); ?>">Administrare produse</A></LI>
                     <LI><A href="<?php echo site_url("admin/productProperties"); ?>">Prioprietati produse</A></LI>
                     <LI><A href="<?php echo site_url("admin/producers"); ?>">Producatori</A></LI>
