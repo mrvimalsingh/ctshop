@@ -24,6 +24,11 @@ class Images extends MY_Controller {
 		header("Content-type: image/jpg");
 		echo readfile($base_dir."uploads/product_images/$type/$id.jpg");
 	}
+
+    function test($x = 100, $y = 100, $t = 'fit') {
+        $this->load->library('business/BImages');
+        $this->bimages->outputImage('test', 'h1234', $x, $y, $t);
+    }
 	
 	function get_category_image($cat_id) {
 		

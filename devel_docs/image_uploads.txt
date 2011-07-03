@@ -1,0 +1,25 @@
+We should define a good way to store images:
+
+Database is out of the question (there are a lot of situation when the database crashes and image files get corrupted)
+Images are supposed to be saved as files on the filesystem.
+
+One centralized way to handle all image files has advantages but also disadvantages.
+Advantages are obvious so I'm not going to explain. A major disadvantage might be the size it might grow into.
+
+A complex structure for images might do the trick if that complexity is somehow documented and fixed but scalable.
+
+We need to make a summary of what we want from an image management solution:
+1. Store images and retrieve them fast
+2. Being able to scale images (make thumbs)
+3. Requested image sizes might change (so the thumbs must not be fixed sizes)
+4. User uploaded images must have a security check (also make sure they don't upload 100 images in one second)
+5. Avoid image filename clash
+6. Mechanism to delete unused image files (prune once in a while)
+
+Proposed solution:
+ - create a hash for the file name and store it in one folder for each image type: products/categories/user/...
+ - image thumbnails should be lazily created (and stored in a subfolder named after it's resolution e.g: 50x50)
+    the image mechanism will then check if the image for the specific resolution is created if not it will create it on the fly
+ - the subfolder's name will also contain a letter indicating that the image will be cropped or fitted.
+ - the mechanism will have to check if the hash already exists and generate another one if it does.
+ - all the objects will store the hash and use it as a weak reference to the image.
