@@ -11,10 +11,8 @@
                 if (data.error != null) {
                     alert(data.error.message);
                 } else {
-                    alert('test');
                     $(data.result).each(function (index, item) {
-                        alert(item.name);
-                        $('#categories').append(createCategoryCardHTML(item));
+                        $('#categories').prepend(createCategoryCardHTML(item)); // prepend because they are reversed for some reason
                     });
                 }
             });
@@ -23,7 +21,13 @@
     function createCategoryCardHTML(category) {
         $("#templateCategoryName").html(category.name);
         $('#templateCategoryShortDesc').html(category.short_desc);
+        $('#templateCategoryLeft').attr('onClick', "moveCategory('left', '"+category.id+"')");
+        $('#templateCategoryRight').attr('onClick', "moveCategory('right', '"+category.id+"')");
         return $("#templateCategoryCard").html();
+    }
+
+    function moveCategory(direction, category) {
+        alert('move category: '+category+' '+direction);
     }
 </script>
 
@@ -57,8 +61,12 @@
         <div style="margin-left: 15px;margin-right: 15px;" align="center">
             <table width="70%" style="font-size: 12px; font-weight: bold;">
                 <tr>
-                    <td>L</td>
-                    <td align="right">R</td>
+                    <td><a id="templateCategoryLeft" href="javascript:void(0)">
+                        <image src="<?=base_url()?>/img/arrow_back.png" />
+                    </a></td>
+                    <td align="right"><a id="templateCategoryRight" href="javascript:void(0)">
+                        <image src="<?=base_url()?>/img/arrow_next.png" />
+                    </a></td>
                 </tr>
                 <tr>
                     <td>Edit</td>

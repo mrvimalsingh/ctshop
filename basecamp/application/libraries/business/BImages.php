@@ -16,6 +16,17 @@ class BImages {
      */
     function uploadImage($category) {
         $imageHash = $this->getNextImageHash($category);
+
+        if ($_FILES["image_file"]["error"] > 0) {
+			return false;
+		} else {
+            $CI = &get_instance();
+            $CI->config->load('myconf');
+            $base_dir = $CI->config->item("site_base_dir");
+            $image_dir = $base_dir.'/uploads/images/'.$category.'/';
+            $moved = move_uploaded_file($_FILES["image_file"]["tmp_name"], $image_dir.$imageHash.".png");
+            return ($moved !== false);
+		}
     }
 
     function getNextImageHash($category) {
@@ -36,14 +47,14 @@ class BImages {
      * calling this method will handle the situation.
      * @param $category
      * @param  $imageHash
+     * @param  $t type of scaling (crop|fit|noscale)
      * @param  $x the image width
      * @param  $y the image height
-     * @param  $t type of scaling (crop|fit)
      * @return void
      */
-    function outputImage($category, $imageHash, $x, $y, $t) {
+    function outputImage($category, $imageHash, $t, $x, $y) {
         // check if parameters are valid...
-        if ($t != 'crop' && $t != 'fit') return false;
+        if ($t != 'crop' && $t != 'fit' && $t != 'noscale') return false;
         if ($category == null || $category == '') return false;
 
         $CI = &get_instance();
@@ -54,6 +65,12 @@ class BImages {
         $base_image_file = $image_dir.$imageHash.'.png';
         // check if the image exists (if the top level image doesn't, the other ones will not either)
         if (!file_exists($base_image_file)) return false;
+
+        if ($t == 'noscale') {
+            header('Content-Type: image/png');
+            readfile($base_image_file);
+            return;
+        }
 
         // create the image configuration string
         $img_conf = $x."x".$y.$t;
