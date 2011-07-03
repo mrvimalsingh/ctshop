@@ -8,7 +8,7 @@
  * 
 */
 
-// TODO asta va trebui bagat undeva in fisierele de limba...
+// TODO this will be in the laguage files eventually
 $config["client_order_statuses"] = array(
 										"n" => "noua",
 										"c" => "confirmata",
