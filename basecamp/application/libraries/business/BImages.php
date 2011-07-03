@@ -15,7 +15,18 @@ class BImages {
      * @return the image hash created for the uploaded image... or false if the upload failed.
      */
     function uploadImage($category) {
+        $imageHash = $this->getNextImageHash($category);
+    }
 
+    function getNextImageHash($category) {
+        $CI = &get_instance();
+        $CI->config->load('myconf');
+        $base_dir = $CI->config->item("site_base_dir");
+        $image_dir = $base_dir.'/uploads/images/'.$category.'/';
+        do {
+            $imageHash = sha1(time());
+        } while(file_exists($image_dir.$imageHash.".png"));
+        return $imageHash;
     }
 
     /**
