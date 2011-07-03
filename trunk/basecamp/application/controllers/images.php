@@ -25,9 +25,21 @@ class Images extends MY_Controller {
 		echo readfile($base_dir."uploads/product_images/$type/$id.jpg");
 	}
 
-    function test($x = 100, $y = 100, $t = 'fit') {
+    // this will eventually replace the old get image...
+    function get_image_improved($category, $transform = 'n', $hash) {
+        $t_values = array(
+            'c' => 'crop',
+            'f' => 'fit',
+            'n' => 'noscale',
+        );
+        $t = substr($transform, 0, 1);
+        if (strlen($transform) > 1) {
+            $box = substr($transform, 1, strlen($transform)-1);
+        } else {
+            $box = 0;
+        }
         $this->load->library('business/BImages');
-        $this->bimages->outputImage('test', 'h1234', $x, $y, $t);
+        $this->bimages->outputImage($category, $hash, $t_values[$t], $box, $box);
     }
 	
 	function get_category_image($cat_id) {
@@ -38,6 +50,18 @@ class Images extends MY_Controller {
 		header("Content-type: image/png");
 		echo $cat["img"];
 	}
+
+    function test_image_upload_form() {
+        // this will be the way to do it
+        $this->load->view("test_upload_form");
+    }
+
+    function upload_test_image() {
+        // this will be the way to do it
+        $this->load->library('business/BImages');
+        echo $this->bimages->uploadImage("test");
+//        redirect(site_url("images/test_image_upload_form"));
+    }
 	
 }
 
