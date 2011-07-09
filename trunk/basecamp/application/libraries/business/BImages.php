@@ -9,6 +9,57 @@
 
 class BImages {
 
+    function getAvailableImagesForCategory($category) {
+        $CI = &get_instance();
+        $CI->config->load('myconf');
+        $base_dir = $CI->config->item("site_base_dir");
+        $image_dir = $base_dir.'/uploads/images/'.$category.'/';
+
+        $images = array();
+        if (is_dir($image_dir)) {
+            if ($dh = opendir($image_dir)) {
+                while (($file = readdir($dh)) !== false) {
+                    if (!is_dir($image_dir.$file)) {
+                        // get the name of the file...
+                        $images[] = substr($file, 0, strlen($file)-4);
+                    }
+                }
+                closedir($dh);
+            }
+        } else {
+            return null;
+        }
+        return $images;
+    }
+
+    function getAvailableImageCategories() {
+        $CI = &get_instance();
+        $CI->config->load('myconf');
+        $base_dir = $CI->config->item("site_base_dir");
+        $image_dir = $base_dir.'/uploads/images/';
+
+        $categories = array();
+        if (is_dir($image_dir)) {
+            if ($dh = opendir($image_dir)) {
+                while (($file = readdir($dh)) !== false) {
+                    if (is_dir($image_dir.$file) && $this->checkDirName($file)) {
+                        $categories[] = $file;
+                    }
+                }
+                closedir($dh);
+            }
+        } else {
+            return null;
+        }
+        return $categories;
+    }
+
+    function checkDirName($name) {
+        $filter_folder_names = array(".", "..", ".svn", ".htaccess");
+        if (in_array($name, $filter_folder_names)) return false;
+        return true;
+    }
+
     /**
      * this method will read the uploaded file and store the image on the hd
      * @param $category the category the image belongs to
@@ -18,15 +69,15 @@ class BImages {
         $imageHash = $this->getNextImageHash($category);
 
         if ($_FILES["image_file"]["error"] > 0) {
-			return false;
-		} else {
+            return false;
+        } else {
             $CI = &get_instance();
             $CI->config->load('myconf');
             $base_dir = $CI->config->item("site_base_dir");
             $image_dir = $base_dir.'/uploads/images/'.$category.'/';
             $moved = move_uploaded_file($_FILES["image_file"]["tmp_name"], $image_dir.$imageHash.".png");
-            return ($moved !== false);
-		}
+            return ($moved !== false)?$imageHash:false;
+        }
     }
 
     function getNextImageHash($category) {

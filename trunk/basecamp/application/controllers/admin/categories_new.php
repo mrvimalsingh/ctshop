@@ -11,16 +11,19 @@
 
 class Categories_new extends MY_Controller {
 	
-	function Categories_new()
-	{
+	function Categories_new() {
 		parent::MY_Controller();
 	}
 	
-	function index()
-	{
+	function index() {
 		$this->showMainTemplate("admin/categories_new", null, true);
 	}
-	
+
+    function select() {
+        // load the select popup....
+        $this->load->view("admin/includes/select_category");
+    }
+
 }
 
 ?>

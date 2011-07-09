@@ -51,16 +51,20 @@ class Images extends MY_Controller {
 		echo $cat["img"];
 	}
 
-    function test_image_upload_form() {
-        // this will be the way to do it
-        $this->load->view("test_upload_form");
+    function ajax_select() {
+        $this->load->view("image_select");
     }
 
-    function upload_test_image() {
+    function image_upload_form($category) {
+        // this will be the way to do it
+        $this->load->view("simple_image_upload_form", array('category' => $category));
+    }
+
+    function upload_image($category) {
         // this will be the way to do it
         $this->load->library('business/BImages');
-        echo $this->bimages->uploadImage("test");
-//        redirect(site_url("images/test_image_upload_form"));
+        $hash = $this->bimages->uploadImage($category);
+        echo '<script type="text/javascript">parent.imageUploaded("'.$category.'", "'.$hash.'")</script>';
     }
 	
 }

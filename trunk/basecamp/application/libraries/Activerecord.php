@@ -11,6 +11,8 @@
  * Init for php.activerecord
  */
 
+date_default_timezone_set("Etc/GMT+2");
+
 // Load php.activerecord
 require_once APPPATH.'/libraries/php-activerecord/ActiveRecord.php';
 
