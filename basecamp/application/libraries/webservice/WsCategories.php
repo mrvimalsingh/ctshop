@@ -24,6 +24,15 @@ class WsCategories {
         return CategoryModel::getSimpleCategories();
     }
 
+    function searchCategories($params) {
+        // TODO define maximum of the limit
+        if (!is_object($params) || !isset($params->query)) {
+            JsonRpc::setInvalidParamsError($this);
+            return null;
+        }
+        return CategoryModel::searchCategories($params->query, isset($params->limit)?$params->limit:10);
+    }
+
     function getCategory($params) {
         // TODO check language if is set to be valid... and throw invalid params if not
         if (!is_object($params)) {

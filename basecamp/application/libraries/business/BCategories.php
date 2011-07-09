@@ -17,7 +17,10 @@ class BCategories {
      */
     function saveCategoryFromJsonObject($categoryJson) {
         // TODO make a sanity check to see if required parameters are set and check if the user has privileges to update a category
-        $category = CategoryModel::find_by_id($categoryJson->id);
+        $category = null;
+        if (isset($categoryJson->id)) {
+            $category = CategoryModel::find_by_id($categoryJson->id);
+        }
         if ($category == null) {
             $category = new CategoryModel();
         }
