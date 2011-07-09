@@ -25,7 +25,7 @@
                 $('#category_select_dialog_search_results').empty();
                 var categories = data.result;
                 $(categories).each(function (index, item) {
-                    $('#category_select_dialog_search_results').prepend('<div><a href="javascript:void(0);" onClick="selectCategory(\''+item.id+'\');" style="margin:5px;"><img src="<?=base_url()?>/images/get_image_improved/categories/c30/'+item.img+'" style="border: 0;" />'+item.name+'</a></div>');
+                    $('#category_select_dialog_search_results').prepend('<div class="ui-grid-header ui-widget-header ui-corner-all" style="margin: .5em;vertical-align: middle"><a href="javascript:void(0);" onClick="selectCategory(\''+item.id+'\');" style="margin:5px;"><img src="<?=base_url()?>/images/get_image_improved/categories/c30/'+item.img+'" style="border: 0;" />'+item.name+'</a></div>');
                 });
             }
         });

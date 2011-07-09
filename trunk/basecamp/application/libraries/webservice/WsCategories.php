@@ -66,4 +66,15 @@ class WsCategories {
         return $status["deleted"];
     }
 
+    function moveCategory($params) {
+        if (!is_object($params) || !isset($params->id)
+            || !isset($params->direction) || !in_array($params->direction, array('up', 'down'))) {
+            JsonRpc::setInvalidParamsError($this);
+            return null;
+        }
+        $CI = &get_instance();
+        $CI->load->library("business/BCategories");
+        return $CI->bcategories->moveCategory($params->id, $params->direction);
+    }
+
 }

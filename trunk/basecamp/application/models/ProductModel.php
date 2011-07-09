@@ -11,4 +11,15 @@ class ProductModel extends ActiveRecord\Model {
     static $table_name = 'products';
 
     // TODO P1 implement filtering here
+
+    static function getProducts($limit, $offset, $filters = null) {
+        // TODO implement filterings
+        $productObjects = ProductModel::all(array('limit' => $limit, 'offset' => $offset));
+        $products = array();
+        foreach ($productObjects as $p) {
+            $product = ShopWs::_createArrayFromModel($p, array("id", "code", "price"));
+            $products[] = $product;
+        }
+        return $products;
+    }
 }

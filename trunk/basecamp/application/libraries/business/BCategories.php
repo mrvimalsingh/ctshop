@@ -42,6 +42,7 @@ class BCategories {
 
             $category_lang->save();
         }
+        $this->fixCategoryOrderRecursive();
         return array('category_id' => $category->id, 'errorCode' => 0, 'errorMessage' => '');
     }
 
@@ -54,6 +55,52 @@ class BCategories {
         // TODO delete dependencies
         $category->delete();
         return array('deleted' => true, 'errorCode' => 0, 'errorMessage' => '');
+    }
+
+    function fixCategoryOrderRecursive($parent_id = null) {
+        $parent_condition = ($parent_id != null)?'`parent_id` = '.$parent_id:'`parent_id` IS NULL';
+        $categories = CategoryModel::all(array('conditions' => $parent_condition, 'order' => '`order` ASC'));
+        $order = 0;
+        if ($categories != null) {
+            foreach ($categories as $c) {
+                $c->order = $order;
+                $c->save();
+                $order++;
+                $this->fixCategoryOrderRecursive($c->id);
+            }
+        }
+    }
+
+    /**
+     * @param  $category_id
+     * @param  $direction up|down
+     * @return boolean true if the operation is successful false otherwise
+     */
+    function moveCategory($category_id, $direction) {
+        $category = CategoryModel::find_by_id($category_id);
+        if ($category == false) {
+            return false; // category was not found
+        }
+        $parent_condition = ($category->parent_id != null)?'`parent_id` = '.$category->parent_id:'`parent_id` IS NULL';
+        if ($direction == 'up') {
+            // get next
+            $other = CategoryModel::first(array('conditions' => "`order` < '".$category->order."' AND ".$parent_condition, 'order' => '`order` DESC'));
+        } else if ($direction == 'down') {
+            // get previous
+            $other = CategoryModel::first(array('conditions' => "`order` > '".$category->order."' AND ".$parent_condition, 'order' => '`order` ASC'));
+        }
+        if ($other != null) {
+            // swap orders...
+            $t = $other->order;
+            $other->order = $category->order;
+            $other->save();
+
+            $category->order = $t;
+            $category->save();
+        } else {
+            return false;
+        }
+        return true;
     }
 
 }

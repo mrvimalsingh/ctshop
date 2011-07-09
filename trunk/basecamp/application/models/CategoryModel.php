@@ -29,7 +29,7 @@ class CategoryModel extends Activerecord\Model {
             $language_id = $language_obj->id;
         }
         $categories = array();
-        $categoryObjects = CategoryModel::all(array('conditions' => 'parent_id '.(($parent_id == null)?'is NULL':'= '.$parent_id)));
+        $categoryObjects = CategoryModel::all(array('conditions' => 'parent_id '.(($parent_id == null)?'is NULL':'= '.$parent_id), 'order' => '`order` ASC'));
         if ($categoryObjects !== null && is_array($categoryObjects)) {
             foreach ($categoryObjects as $catObj) {
                 $cat = Activerecord::createArrayFromModel($catObj, array('id', 'img', 'parent_id', 'order', 'appear_on_site'));
@@ -157,6 +157,34 @@ class CategoryModel extends Activerecord\Model {
         $this->order = (isset($category->order))?$category->order:0;
         $this->img = (isset($category->img))?$category->img:null;
         $this->appear_on_site = (isset($category->appear_on_site))?$category->appear_on_site:'n';
+    }
+
+    public function getParentCategory() {
+        $parent_id = $this->parent_id;
+        if ($parent_id != null && $parent_id > 0) {
+            $parent = ProductCategoryModel::find_by_id($parent_id);
+            return $parent;
+        }
+        return null;
+    }
+
+    public function getChildCategories() {
+        if (!isset($this->id)) {
+            return ProductCategoryModel::all(array('conditions' => 'parent_id IS NULL'));
+        }
+        return ProductCategoryModel::all(array('conditions' => 'parent_id = '.$this->id));
+    }
+
+    public function getProducts() {
+        $prcList = ProductReCategoryModel::all(array('conditions' => 'category_id = '.$this->id));
+        $products = array();
+        foreach ($prcList as $prc) {
+            $prod = ProductModel::find_by_id($prc->product_id);
+            if ($prod != null) {
+                $products[] = $prod;
+            }
+        }
+        return $products;
     }
 
 }
