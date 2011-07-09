@@ -40,6 +40,18 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                <a href="javascript:void(0);" onclick="moveSelectedCategory('up')">
+                                    <img src="<?=base_url()?>img/arrow_top.png" />
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" onclick="moveSelectedCategory('down')">
+                                    <img src="<?=base_url()?>img/arrow_down.png" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="2">
                                 <div id="categoryLanguageTabs">
                                     <ul>
@@ -103,8 +115,9 @@
 
 
 <div id="categoryImageSelect"></div>
-
 <div id="categoryParentSelect"></div>
+
+<!-- TODO add category properties -->
 
 <script>
 
@@ -257,6 +270,20 @@
                     });
         });
         return jstreeData;
+    }
+
+    function moveSelectedCategory(direction) {
+        makeJsonRpcCall('categories', 'moveCategory', {'id':selectedCategory.id, 'direction':direction}, function (data) {
+            if (data.error != null) {
+                alert(data.error.message);
+            } else {
+                if (!data.result) {
+                    alert('category could not be moved');
+                } else {
+                    loadCategoryTree();
+                }
+            }
+        });
     }
 
     loadCategoryTree();

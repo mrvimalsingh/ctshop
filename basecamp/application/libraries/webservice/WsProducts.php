@@ -14,7 +14,19 @@ class WsProducts {
 
     function getProduct($params) {
         $product = ProductModel::find_by_id($params);
+        // GET ALL OTHER DETAILS...
         return ShopWs::_createArrayFromModel($product, array("id", "code", "price"));
+    }
+
+    function getProducts($params) {
+        // check params
+        if (!is_object($params)) {
+            JsonRpc::setInvalidParamsError($this);
+            return null;
+        }
+        // expected params are offset/count/filters(object)/order_by/order_dir.
+        // for now the filters will include category/search_term/price_lower/price_higher/code/sale(y/n)/in_stock
+
     }
 
 }
