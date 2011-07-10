@@ -28,7 +28,7 @@ The project is still in it's early stage, but I propose to have a set of tools l
 = Project =
 
 The project management part of CT-Shop will be handled via:
-https://www.gravitydev.com/project/28384
+https://www.gravitydev.com/project/29890
 
 This is a free tool, for agile development, I hope everyone likes it.
 In the long term I will try to get an open source JIRA license with GreenHopper and possibly Crucible for code-reviews. Just have to figure out where to host it as it requires quite a bit of RAM and CPU to run.
