@@ -9,6 +9,13 @@
  
 class ProductModel extends ActiveRecord\Model {
     static $table_name = 'products';
+    static $has_many = array(
+        array('products_lang', 'class_name' => 'ProductLangModel', 'foreign_key' => 'product_id'),
+    );
+    static $fields = array('id', 'code','producer_id', 'price', 'in_stock', 'available_online', 'appear_on_site', 'featured');
+    static $lang_fields = array('name', 'keywords','short_desc', 'description');
+    static $lang_ref = 'products_lang';
+    static $lang_field = 'language_id';
 
     // TODO P1 implement filtering here
 
@@ -17,9 +24,9 @@ class ProductModel extends ActiveRecord\Model {
         $productObjects = ProductModel::all(array('limit' => $limit, 'offset' => $offset));
         $products = array();
         foreach ($productObjects as $p) {
-            $product = ShopWs::_createArrayFromModel($p, array("id", "code", "price"));
-            $products[] = $product;
+            $products[] = Activerecord::returnArrayWithLang($p);
         }
         return $products;
     }
+
 }
