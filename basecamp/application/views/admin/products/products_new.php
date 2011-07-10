@@ -40,7 +40,8 @@
         $("#myTable").styleTable();
     });
 </script>
-<div class="ui-grid-header ui-widget-header ui-corner-top">jQuery UI Grid Header</div>
+
+<div class="ui-grid-header ui-widget-header ui-corner-top" style="padding: 5px">jQuery UI Grid Header</div>
 <table id="myTable" width="100%" class="">
     <thead>
     <tr>
@@ -67,3 +68,4 @@
     </tr>
     </tbody>
 </table>
+<div class="ui-grid-header ui-widget-header ui-corner-bottom" style="padding: 5px">jQuery UI Grid Header</div>

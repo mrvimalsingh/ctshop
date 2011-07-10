@@ -44,22 +44,23 @@
         </TR>
         <TR>
             <TD valign="top" width="200" class="sideNav" style="padding-top: 40px;">
-                <UL class="slidedoormenu">
-                    <LI><A href="<?php echo site_url("admin/productReviews"); ?>">Administrare reviews</A></LI>
-                    <LI><A href="<?php echo site_url("admin/news"); ?>">Administrare noutati</A></LI>
-                    <LI><A href="<?php echo site_url("admin/categories"); ?>">Administrare categorii</A></LI>
-                    <LI><A href="<?php echo site_url("admin/categories_new"); ?>">Administrare categorii NEW</A></LI>
-                    <LI><A href="<?php echo site_url("admin/products"); ?>">Administrare produse</A></LI>
-                    <LI><A href="<?php echo site_url("admin/products_new"); ?>">Administrare produse NEW</A></LI>
-                    <LI><A href="<?php echo site_url("admin/productProperties"); ?>">Prioprietati produse</A></LI>
-                    <LI><A href="<?php echo site_url("admin/producers"); ?>">Producatori</A></LI>
-                    <LI><A href="<?php echo site_url("admin/orders"); ?>">Administrare comenzi</A></LI>
-                    <LI><A href="<?php echo site_url("admin/ptSettings"); ?>">Setari plata &amp; transport</A></LI>
-                    <LI><A href="<?php echo site_url("admin/languages"); ?>">Setari limbi</A></LI>
-                    <LI><A href="<?php echo site_url("admin/firm"); ?>">Detalii firma</A></LI>
+                <UL class="ui-menu">
+                    <LI class="ui-menu-item ui-widget-header ui-corner-tr"><A href="<?php echo site_url("admin/reports"); ?>">Rapoarte</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/productReviews"); ?>">Administrare reviews</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/news"); ?>">Administrare noutati</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/categories"); ?>">Administrare categorii</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/categories_new"); ?>">Administrare categorii NEW</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/products"); ?>">Administrare produse</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/products_new"); ?>">Administrare produse NEW</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/productProperties"); ?>">Prioprietati produse</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/producers"); ?>">Producatori</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/orders"); ?>">Administrare comenzi</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/ptSettings"); ?>">Setari plata &amp; transport</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/languages"); ?>">Setari limbi</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/firm"); ?>">Detalii firma</A></LI>
                     <!-- <LI><A href="<?php echo site_url("admin/users"); ?>">Administrare utilizatori</A></LI> -->
-                    <LI><A href="<?php echo site_url("admin/clients"); ?>">Administrare clienti</A></LI>
-                    <LI><A href="<?php echo site_url("admin/banner"); ?>">Administrare banner</A></LI>
+                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/clients"); ?>">Administrare clienti</A></LI>
+                    <LI class="ui-menu-item ui-widget-header ui-corner-br"><A href="<?php echo site_url("admin/banner"); ?>">Administrare banner</A></LI>
                 </UL>
             </TD>
             <TD valign="top" style="padding-top: 40px;">
