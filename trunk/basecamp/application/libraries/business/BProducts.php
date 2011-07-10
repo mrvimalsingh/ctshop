@@ -9,6 +9,12 @@
  
 class BProducts {
 
+    function saveProduct($product) {
+        //
+    }
 
+    function deleteProduct() {
+
+    }
 
 }

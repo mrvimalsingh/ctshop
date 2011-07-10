@@ -1,3 +1,7 @@
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jsonrpc.js"></script>
+<script>
+    baseUri = '<?=base_url();?>';
+</script>
 <style>
     .styleTable { border-collapse: separate; }
     .styleTable TD { font-weight: normal !important; padding: .4em; border-top-width: 0px !important; }
@@ -36,8 +40,35 @@
         };
     })(jQuery);
 
+    function loadProducts() {
+//        product_table_data
+        makeJsonRpcCall('products', 'getProducts', {'limit':10, 'offset':0, 'filters':null}, function (data) {
+            if (data.error != null) {
+                alert(data.error.message);
+            } else {
+                $('#product_table_data').empty();
+                $(data.result).each(function (index, item) {
+                    addProductRow(item);
+                });
+                $("#myTable").styleTable();
+//                alert(data.result);
+            }
+        });
+    }
+
+    function addProductRow(product) {
+        $('#product_table_data').append("<tr>");
+        $('#product_table_data').append("<td>"+product.code+"</td>");
+        $('#product_table_data').append("<td>"+product.name+"</td>");
+        $('#product_table_data').append("<td>"+product.price+"</td>");
+        $('#product_table_data').append("<td>"+product.in_stock+"</td>");
+        $('#product_table_data').append("<td>"+product.available_online+"</td>");
+        $('#product_table_data').append("</tr>");
+    }
+
     $(document).ready(function () {
         $("#myTable").styleTable();
+        loadProducts();
     });
 </script>
 
@@ -45,27 +76,14 @@
 <table id="myTable" width="100%" class="">
     <thead>
     <tr>
-        <th>Column 1</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
+        <th width="70px">Code</th>
+        <th>Name</th>
+        <th width="70px">Price</th>
+        <th width="70px">In stock</th>
+        <th width="70px">Available to order</th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td>Row 0 Column 0</td>
-        <td >Row 0 Column 1</td>
-        <td >Row 0 Column 2</td>
-    </tr>
-    <tr >
-        <td>Row 1 Column 0</td>
-        <td>Row 1 Column 1</td>
-        <td>Row 1 Column 2</td>
-    </tr>
-    <tr >
-        <td>Row 2 Column 0</td>
-        <td>Row 2 Column 1</td>
-        <td>Row 2 Column 2</td>
-    </tr>
+    <tbody id="product_table_data">
     </tbody>
 </table>
 <div class="ui-grid-header ui-widget-header ui-corner-bottom" style="padding: 5px">jQuery UI Grid Header</div>

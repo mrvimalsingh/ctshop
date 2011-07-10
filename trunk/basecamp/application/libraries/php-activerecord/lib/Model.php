@@ -1669,5 +1669,6 @@ class Model
 		}
 		return true;
 	}
+
 };
 ?>

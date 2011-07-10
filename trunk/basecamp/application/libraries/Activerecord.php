@@ -54,12 +54,44 @@ class Activerecord {
      * @param  $params
      * @return array
      */
-    static function createArrayFromModel($model, $params) {
+    static function createArrayFromModel($model) {
+        $params = $model::$fields;
         $res = array();
-        foreach ($params as $p) {
-            $res[$p] = $model->$p;
+        if (is_array($params)) {
+            foreach ($params as $p) {
+                $res[$p] = $model->$p;
+            }
         }
         return $res;
+    }
+
+    static function getDefaultLangValues($model, $language_id = null) {
+        if ($language_id == null) {
+            $language_obj = LanguageModel::getDefault();
+            $language_id = $language_obj->id;
+        }
+        $deflang = array();
+
+        $lang_ref = $model::$lang_ref;
+        $lang_fields = $model::$lang_fields;
+        $lang_field = $model::$lang_field;
+
+        foreach ($model->$lang_ref as $lang) {
+            if ($lang->$lang_field == $language_id) {
+                foreach ($lang_fields as $f) {
+                    $deflang[$f] = $lang->$f;
+                }
+                break;
+            }
+        }
+        return $deflang;
+    }
+
+    static function returnArrayWithLang($model, $language_id = null) {
+        $obj = Activerecord::createArrayFromModel($model);
+        $deflang = Activerecord::getDefaultLangValues($model, $language_id);
+        $obj = array_merge($obj, $deflang);
+        return $obj;
     }
 }
 
