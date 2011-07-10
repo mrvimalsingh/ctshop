@@ -17,8 +17,8 @@
         <td valign="top">
             <div id="edit_category">
 
-                <fieldset width="100%">
-                    <legend>Adauga/Modifica Categorie</legend>
+                <fieldset width="100%" class="ui-widget-content">
+                    <legend class="ui-corner-all ui-widget-header" style="padding: 5px;">Adauga/Modifica Categorie</legend>
                     <table>
                         <tr>
                             <td colspan="2">
