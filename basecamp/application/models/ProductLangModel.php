@@ -9,4 +9,6 @@
  
 class ProductLangModel extends ActiveRecord\Model {
     static $table_name = 'products_lang';
+    static $fields = array('name', 'keywords','short_desc', 'description');
+    static $lang_id_field = 'language_id';
 }

@@ -9,4 +9,6 @@
  
 class CategoryLangModel extends Activerecord\Model {
     static $table_name = 'categories_lang';
+    static $fields = array('lang_id', 'name', 'keywords', 'short_desc', 'description');
+    static $lang_id_field = 'lang_id';
 }
