@@ -51,7 +51,6 @@ class Activerecord {
      * utility function to get only the desired fields from a db model and turn it into an array
      * @static
      * @param  $model
-     * @param  $params
      * @return array
      */
     static function createArrayFromModel($model) {
@@ -65,32 +64,28 @@ class Activerecord {
         return $res;
     }
 
-    static function getDefaultLangValues($model, $language_id = null) {
+    static function returnArrayWithLang($model, $language_id = null) {
         if ($language_id == null) {
             $language_obj = LanguageModel::getDefault();
             $language_id = $language_obj->id;
         }
-        $deflang = array();
-
+        $obj = Activerecord::createArrayFromModel($model);
         $lang_ref = $model::$lang_ref;
-        $lang_fields = $model::$lang_fields;
-        $lang_field = $model::$lang_field;
 
-        foreach ($model->$lang_ref as $lang) {
-            if ($lang->$lang_field == $language_id) {
+        $langObjects = $model->$lang_ref;
+        $langArray = array();
+        foreach ($langObjects as $langObj) {
+            $lang_id_field = $langObj::$lang_id_field;
+            $lang_fields = $langObj::$fields;
+            $lang = Activerecord::createArrayFromModel($langObj);
+            $langArray[] = $lang;
+            if ($langObj->$lang_id_field == $language_id) {
                 foreach ($lang_fields as $f) {
-                    $deflang[$f] = $lang->$f;
+                    $obj[$f] = $langObj->$f;
                 }
-                break;
             }
         }
-        return $deflang;
-    }
-
-    static function returnArrayWithLang($model, $language_id = null) {
-        $obj = Activerecord::createArrayFromModel($model);
-        $deflang = Activerecord::getDefaultLangValues($model, $language_id);
-        $obj = array_merge($obj, $deflang);
+        $obj["lang"] = $langArray;
         return $obj;
     }
 }
