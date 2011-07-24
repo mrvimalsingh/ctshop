@@ -1,0 +1,256 @@
+{
+    "_comment1": "This configuration file is used by the webservice implementation and also to serve a JSON-RPC Webservice description to clients",
+
+    "categories": {
+        "id": "{{domain}}webservices/schema/categories",
+        "location": "{{domain}}webservices/jsonrpc/categories",
+        "description": "Webservice that exposes the methods dealing with categories on the CT-Shop website instance",
+        "version": "1.0",
+        "handlerClass": "BCategories",
+        "getCategories":{
+            "type": "method",
+            "description": "Returns all categories recursively",
+            "returns" : ["{{domain}}webservices/schema/category.object"],
+            "params" : [
+                {
+                    "name": "withDetails",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "if this is set to true categories will have all the details set, if not only basic information is returned",
+                    "default": true
+                }
+            ]
+        },
+        "getCategory": {
+            "type": "method",
+            "description": "Returns detailed category object",
+            "returns" : "{{domain}}webservices/schema/category.object",
+            "params" : [
+                {
+                    "name": "id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "the id of the category to return"
+                }
+            ]
+        },
+        "saveCategory": {
+            "type": "method",
+            "description": "Save a category object",
+            "returns" : "boolean",
+            "params" : [
+                {
+                    "name": "category",
+                    "type": "{{domain}}webservices/schema/category.object",
+                    "required": true,
+                    "description": "the category object to save"
+                }
+            ]
+        },
+        "searchCategory": {
+            "type": "method",
+            "description": "Search for a particular category, categories are returned as a list not recursively",
+            "returns" : ["{{domain}}webservices/schema/category.object"],
+            "params" : [
+                {
+                    "name": "query",
+                    "type": "string",
+                    "required": true,
+                    "description": "simple string or regex"
+                },
+                {
+                    "name": "matchType",
+                    "type": "string",
+                    "required": false,
+                    "description": "this can be: string|regex",
+                    "options": ["string", "regex"],
+                    "default": "string"
+                },
+                {
+                    "name": "limit",
+                    "type": "integer",
+                    "required": false,
+                    "description": "the number of maximum categories to return",
+                    "default": 10,
+                    "minimum": 0,
+                    "maximum": 20
+                }
+            ]
+        },
+        "moveCategory": {
+            "type": "method",
+            "description": "Move the specified category in a certain direction (this will affect the categories: order property), returns true if the category was moved and false if not",
+            "returns" : "boolean",
+            "params" : [
+                {
+                    "name": "id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "the id for category to move"
+                },
+                {
+                    "name": "direction",
+                    "type": "string",
+                    "required": true,
+                    "description": "the direction the category should be moved",
+                    "options": ["up", "down"]
+                }
+            ]
+        },
+        "deleteCategory": {
+            "type": "method",
+            "description": "Deletes a category object and returns whether it was successful or not",
+            "returns" : "boolean",
+            "params" : [
+                {
+                    "name": "id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "the id of the category to delete"
+                }
+            ]
+        }
+    },
+
+    "_comment2": "#################################################################################################################################",
+    "general": {
+        "id": "{{domain}}webservices/schema/general",
+        "description": "Webservice that exposes the methods dealing with general stuff on the CT-Shop website instance",
+        "location": "{{domain}}webservices/jsonrpc/general",
+        "version": "1.0"
+    },
+
+    "_comment3": "#################################################################################################################################",
+    "orders": {
+        "id": "{{domain}}webservices/schema/orders",
+        "description": "Webservice that exposes the methods dealing with orders on the CT-Shop website instance",
+        "location": "{{domain}}webservices/jsonrpc/orders",
+        "version": "1.0"
+    },
+
+    "_comment4": "#################################################################################################################################",
+    "products": {
+        "id": "{{domain}}webservices/schema/products",
+        "description": "Webservice that exposes the methods dealing with products on the CT-Shop website instance",
+        "location": "{{domain}}webservices/jsonrpc/products",
+        "version": "1.0"
+    },
+
+    "_comment5": "#################################################################################################################################",
+    "users": {
+        "id": "{{domain}}webservices/schema/users",
+        "description": "Webservice that exposes the methods dealing with users on the CT-Shop website instance",
+        "location": "{{domain}}webservices/jsonrpc/users",
+        "version": "1.0"
+    },
+
+    "_comment6": "#################################################################################################################################",
+    "category.object": {
+        "id": "{{domain}}webservices/schema/category.object",
+        "description": "Description of the category JSON object returned by various JSON-RPC calls",
+        "version": "1.0",
+        "fields":[
+            {
+                "name": "id",
+                "type": "integer",
+                "required": false,
+                "default": null,
+                "description": "id of the category"
+            },
+            {
+                "name": "parent_id",
+                "type": "integer",
+                "required": false,
+                "default": null,
+                "description": "parent category identifier"
+            },
+            {
+                "name": "order",
+                "type": "integer",
+                "required": false,
+                "default": 0,
+                "description": "the order in which it appears in the category tree"
+            },
+            {
+                "name": "img",
+                "type": "string",
+                "required": false,
+                "default": null,
+                "description": "a hash representing the image, see the image documentation for further details"
+            },
+            {
+                "name": "appear_on_site",
+                "type": "string",
+                "options": ["y", "n"],
+                "required": false,
+                "default": "n",
+                "description": "specifies whether it appears on the website or not, non administrators will not see these in the result from webservices"
+            },
+            {
+                "name": "lang",
+                "type": ["{{domain}}webservices/schema/category_lang.object"],
+                "required": false,
+                "default": null,
+                "description": "an array of localized values for the category object"
+            }
+        ]
+    },
+
+    "_comment7": "#################################################################################################################################",
+    "category_lang.object": {
+        "id": "{{domain}}webservices/schema/category_lang.object",
+        "description": "localized values for the category object",
+        "version": "1.0",
+        "fields":[
+            {
+                "name": "id",
+                "type": "integer",
+                "required": false,
+                "default": null,
+                "description": "id of the localized value"
+            },
+            {
+                "name": "category_id",
+                "type": "integer",
+                "required": true,
+                "description": "category identifier"
+            },
+            {
+                "name": "lang_id",
+                "type": "integer",
+                "required": true,
+                "description": "the language of the localized value"
+            },
+            {
+                "name": "name",
+                "type": "string",
+                "required": false,
+                "default": "",
+                "description": "category name"
+            },
+            {
+                "name": "keywords",
+                "type": "string",
+                "required": false,
+                "default": "",
+                "description": "keywords to be used for SEO purposes"
+            },
+            {
+                "name": "short_desc",
+                "type": "string",
+                "required": false,
+                "default": "",
+                "description": "short description of the category in the selected language"
+            },
+            {
+                "name": "description",
+                "type": "string",
+                "required": false,
+                "default": "",
+                "description": "description for the category"
+            }
+
+        ]
+    },
+    "_comment8": "#################################################################################################################################"
+}

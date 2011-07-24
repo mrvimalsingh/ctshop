@@ -120,7 +120,7 @@ class BImages {
         if ($t == 'noscale') {
             header('Content-Type: image/png');
             readfile($base_image_file);
-            return;
+            return true;
         }
 
         // create the image configuration string

@@ -20,66 +20,17 @@ class Webservices extends Controller {
         echo "you have to specify which webservice you're going to use";
     }
 
+    function schema($ws = null) {
+        $this->load->library('webservice/WebServiceImpl');
+        $this->webserviceimpl->getDescriptor($ws);
+    }
+
     function jsonrpc($ws = null) {
-
-        $webservices = array(
-            "products" => "WsProducts",
-            "categories" => "WsCategories",
-            "general" => "WsGeneral",
-            "user" => "WsUser",
-            "orders" => "WsOrders"
-        );
-
-        $this->load->library('JsonRpc');
-        if ($ws == null || $ws == "") {
-            $this->jsonrpc->registerHandlerClass($this);
-        } else {
-            if ($webservices[$ws]) {
-                $handlerClassName = $webservices[$ws];
-                $handlerClassNameLc = strtolower($handlerClassName);
-                $this->load->library('webservice/'.$handlerClassName);
-                $this->jsonrpc->registerHandlerClass($this->$handlerClassNameLc);
-            } else {
-                echo "Unknown webservice: ".$ws;
-                return;
-            }
-        }
+        $this->load->library('webservice/JsonRpc');
+        $this->load->library('webservice/WebServiceImpl.php');
+        $this->webserviceimpl->setSelectedGroup($ws);
+        $this->jsonrpc->registerHandlerClass($this->webserviceimpl);
         $this->jsonrpc->startJsonRpc();
-    }
-
-    function get_languages($params) {
-        $langs = LanguageModel::all();
-        $result = array();
-        foreach ($langs as $lang) {
-            $result[] = $this->_createArrayFromModel($lang, array("id", "code", "name", "default", "admin_default"));
-        }
-        return $result;
-    }
-
-    function check_user_logged_in($params) {
-        $this->load->library('session');
-        return array("user_id" => $this->session->userdata('user_id'));
-    }
-
-    function check_header() {
-        return getallheaders();
-    }
-
-    function subtract($params) {
-        if (is_array($params) && count($params) == 2) {
-            return $params[0]-$params[1];
-        } else {
-            JsonRpc::setInvalidParamsError($this);
-            return null;
-        }
-    }
-
-    static function _createArrayFromModel($model, $params) {
-        $res = array();
-        foreach ($params as $p) {
-            $res[$p] = $model->$p;
-        }
-        return $res;
     }
 
 }

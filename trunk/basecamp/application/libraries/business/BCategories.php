@@ -9,6 +9,60 @@
  
 class BCategories {
 
+    var $errorCode = 0;
+    var $errorMessage = "";
+
+    function getCategories($params) {
+        return CategoryModel::getAllCategoriesRecursive();
+    }
+
+    function searchCategory($params) {
+        // TODO Mihaly 7/24/11 MEDIUM parameter checking will be in the ws implementation
+        if (!is_object($params) || !isset($params->query)) {
+            JsonRpc::setInvalidParamsError($this);
+            return null;
+        }
+        return CategoryModel::searchCategories($params->query, isset($params->limit)?$params->limit:10);
+    }
+
+    function getCategory($params) {
+        // TODO check language if is set to be valid... and throw invalid params if not
+        if (!is_object($params)) {
+            JsonRpc::setInvalidParamsError($this);
+            return null;
+        }
+        $category = CategoryModel::getCategoryArrayWithLanguages($params->id);
+        if ($category == null) {
+            $this->errorCode = -1;
+            $this->errorMessage = "Category not found";
+        }
+        return $category;
+    }
+
+    function saveCategory($params) {
+        // insert/update category
+        $status = $this->saveCategoryFromJsonObject($params);
+        $this->errorCode = $status["errorCode"];
+        $this->errorMessage = $status["errorMessage"];
+        return $status["category_id"];
+    }
+
+    function deleteCategory($params) {
+        $status = $this->_deleteCategory($params->id);
+        $this->errorCode = $status["errorCode"];
+        $this->errorMessage = $status["errorMessage"];
+        return $status["deleted"];
+    }
+
+    function moveCategory($params) {
+        if (!is_object($params) || !isset($params->id)
+            || !isset($params->direction) || !in_array($params->direction, array('up', 'down'))) {
+            JsonRpc::setInvalidParamsError($this);
+            return null;
+        }
+        return $this->_moveCategory($params->id, $params->direction);
+    }
+
     /**
      * saves/updates a category from a json-rpc call
      * @param  $categoryJson
@@ -46,7 +100,7 @@ class BCategories {
         return array('category_id' => $category->id, 'errorCode' => 0, 'errorMessage' => '');
     }
 
-    function deleteCategory($id) {
+    function _deleteCategory($id) {
         $category = CategoryModel::find_by_id($id);
         if ($category == null) {
             return array('deleted' => false, 'errorCode' => -1, 'errorMessage' => 'Category not found');
@@ -76,7 +130,7 @@ class BCategories {
      * @param  $direction up|down
      * @return boolean true if the operation is successful false otherwise
      */
-    function moveCategory($category_id, $direction) {
+    function _moveCategory($category_id, $direction) {
         $category = CategoryModel::find_by_id($category_id);
         if ($category == false) {
             return false; // category was not found

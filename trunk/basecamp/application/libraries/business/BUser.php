@@ -2,15 +2,12 @@
 /**
  * Created by IntelliJ IDEA.
  * User: codetwister
- * Date: 7/1/11
- * Time: 2:13 AM
+ * Date: 7/24/11
+ * Time: 5:11 AM
  * To change this template use File | Settings | File Templates.
  */
  
-class WsUser {
-
-    var $errorCode = 0;
-    var $errorMessage = "";
+class BUser {
 
     function login($params) {
         // params must be a username and a password hash

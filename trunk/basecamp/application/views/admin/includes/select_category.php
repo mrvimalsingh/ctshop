@@ -17,7 +17,7 @@
 
     function searchCategory(query) {
         // TODO add ajax loader image...
-        makeJsonRpcCall('categories', 'searchCategories', {'query':query}, function (data) {
+        makeJsonRpcCall('categories', 'searchCategory', {'query':query}, function (data) {
             // TODO delete ajax loader image
             if (data.error != null) {
                 alert(data.error.message);

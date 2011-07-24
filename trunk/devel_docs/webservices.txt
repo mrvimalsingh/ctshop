@@ -1,0 +1,43 @@
+Webservices will call the business module for every action.
+Every business module will have a webservice interface that will communicate with the webservice component
+
+The easiest way to separate business modules from each other is to categorise and define actions that it can take
+and implementation will follow.
+
+The way I see it there are 2 major categories of actions:
+1. Client Actions.
+2. Admin Actions.
+Admins can of course see everything a client can see but sometimes the information for the admin should be more complete
+or at least based on some sort of permission.
+
+So one of the first things to implement is the permission mechanism
+(and a magic override with a password set on installation for full permission).
+
+So we have to define what a user can do and then extend that with what an admin can do (in terms of action)
+And then define permissions and levels and all that.
+
+There are several basic operations (CRUD):
+1. Create
+2. Read (this also refers to list/search/get details for one item)
+3. Update
+4. Delete
+Clients for most types of operations will only be able to "Read"
+And admins will be able to do all the other operations. (we will name them "Update" to shorten this document)
+When not specified the client has access to his personal objects and admins have global access.
+
+###### Actions:
+------------------------------------------------------------------------------------------------------------------------
+CLIENT ACTIONS:
+1. Categories "Read"
+2. Products "Read"
+3. News "Read"
+4. Own Profile "Read"/"Update"
+5. Other Profile "Read"
+6. Wish list "Read"/"Update"
+7. Order "Create"/"Update" (update here only works when the order is not finalized)
+8. Languages "Read"
+9. Currencies "Read"
+------------------------------------------------------------------------------------------------------------------------
+ADMIN ACTIONS:
+1. ALL CLIENT ACTIONS WITH "Update"
+------------------------------------------------------------------------------------------------------------------------
