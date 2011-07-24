@@ -9,7 +9,7 @@
  
 class JsonRpc {
 
-    var $classes = array();
+    var $handlers = array();
     var $error;
 
 
@@ -19,7 +19,7 @@ class JsonRpc {
      * @return void
      */
     function registerHandlerClass($class) {
-        $this->classes[] = $class;
+        $this->handlers[] = $class;
     }
 
     function startJsonRpc() {
@@ -73,17 +73,22 @@ class JsonRpc {
 
     private function _callJsonRpcMethod($jsonRpc, &$response) {
         if (isset($jsonRpc->id)) $response["id"] = $jsonRpc->id;
+        $method = $jsonRpc->method;
 
-        foreach ($this->classes as $cls) {
-            if (method_exists($cls, $jsonRpc->method)) {
-                $method = $jsonRpc->method;
-                $response["result"] = $cls->$method(isset($jsonRpc->params)?$jsonRpc->params:null);
-                $response["error"] = ($cls->errorCode < 0)?array("code" => $cls->errorCode, "message" => $cls->errorMessage):null;
+        foreach ($this->handlers as $cls) {
+            $r = $cls->callJsonRPC($method, (isset($jsonRpc->params)?$jsonRpc->params:null));
+            if ($r != null) {
+                $response["result"] = $r["result"];
+                $response["error"] = $r["error"];
                 return;
             }
         }
 
         $response["error"] = array("code" => "-32601", "message" => "Method not found.");
+    }
+
+    public static function getInvalidParamsError() {
+        return array("errorCode" => -32602, "errorMessage" => "Invalid params.");
     }
 
     public static function setInvalidParamsError($cls) {
