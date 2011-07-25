@@ -1,4 +1,3 @@
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jsonrpc.js"></script>
 <script>
     baseUri = '<?=base_url();?>';
 </script>

@@ -14,8 +14,10 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.4.2.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/ui/jquery-ui-1.8.1.custom.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/jsonrpc.js"></script>
     <script type="text/javascript" src="<?=base_url()?>/js/highslide.js"></script>
     <script>
+        baseUri = '<?=base_url();?>';
         //<![CDATA[
         hs.registerOverlay({
             html: '<div class="closebutton" onclick="return hs.close(this)" title="Close"></div>',
