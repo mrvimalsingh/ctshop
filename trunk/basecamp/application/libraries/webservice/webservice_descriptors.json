@@ -141,7 +141,32 @@
         "id": "{{domain}}webservices/schema/users",
         "description": "Webservice that exposes the methods dealing with users on the CT-Shop website instance",
         "location": "{{domain}}webservices/jsonrpc/users",
-        "version": "1.0"
+        "version": "1.0",
+        "handlerClass": "BUser",
+        "authenticate": {
+            "type": "method",
+            "description": "Authenticate a user without sending the password in clear text",
+            "returns" : "boolean",
+            "params" : [
+                {
+                    "name": "userName",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "required": true,
+                    "description": "The passwords hash with the salt: hash(hash(pass)+hash(salt))"
+                },
+                {
+                    "name": "salt",
+                    "type": "string",
+                    "required": true,
+                    "description": "the salt used to hash the password"
+                }
+            ]
+        }
     },
 
     "_comment6": "#################################################################################################################################",

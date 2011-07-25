@@ -14,7 +14,7 @@ class UserModel extends ActiveRecord\Model {
         $user = UserModel::find_by_username($user_name);
         if (isset($user->password)) {
             // calculate the password hash
-            $calculated_hash = sha1($user->password.sha1($salt));
+            $calculated_hash = hash("sha256", $user->password.hash("sha256", $salt));
             if ($calculated_hash == $pw) {
                 return $user; // return the user and do whatever with it
             }

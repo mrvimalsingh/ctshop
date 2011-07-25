@@ -1,11 +1,7 @@
 <!-- load the top level categories from the webservice -->
 <script type="text/javascript" src="<?=base_url()?>ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=base_url()?>ckeditor/adapters/jquery.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/jsonrpc.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.jstree.js"></script>
-<script>
-    baseUri = '<?=base_url();?>';
-</script>
 
 <table width="100%">
     <tr>

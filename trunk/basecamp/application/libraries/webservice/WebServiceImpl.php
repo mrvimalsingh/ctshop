@@ -66,7 +66,7 @@ class WebServiceImpl {
         $result = $CI->$handlerClassNameLc->$method($params);
         $errorCode = $CI->$handlerClassNameLc->errorCode;
         $errorMessage = $CI->$handlerClassNameLc->errorMessage;
-        return array("result" => $result, "error" => ($errorCode != 0)?array('errorCode' => $errorCode, 'errorMessage' => $errorMessage):null);
+        return array("result" => $result, "error" => ($errorCode != 0)?array('code' => $errorCode, 'message' => $errorMessage):null);
     }
 
     function checkParams($group, $method, $params = null) {
