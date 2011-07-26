@@ -9,6 +9,9 @@
 
 class BGeneral {
 
+    var $errorCode = 0;
+    var $errorMessage = "";
+
     function getLanguages() {
         $langs = LanguageModel::all();
         $result = array();
@@ -18,9 +21,10 @@ class BGeneral {
         return $result;
     }
 
-    function checkUserLoggedIn() {
-        $this->load->library('session');
-        return array("user_id" => $this->session->userdata('user_id'));
+    function getImages($params) {
+        $CI = &get_instance();
+        $CI->load->library("business/BImages");
+        return $CI->bimages->getAvailableImagesForCategory($params->imageCategory);
     }
 
 }

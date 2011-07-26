@@ -330,4 +330,17 @@ textarea {
   margin-left: 0px;
   padding:6px;
   }
-  
+
+.fancy_menu {
+    list-style-type: none;
+    margin: 0;
+	padding: 0;
+}
+.fancy_menu li {
+    padding: 5px;
+}
+
+.fancy_menu li a{
+    padding: 5px;
+    display: block;
+}

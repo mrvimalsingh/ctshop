@@ -1,46 +1,92 @@
+<fieldset width="100%">
+    <legend>Filtrari</legend>
+    <table>
+        <tr>
+            <td>
+                <label>Categorie: </label>
+            </td>
+            <td>
+                <div id="selected_category"></div>
+                <a href="javascript:void(0)" id="add_category_parent" onclick="startSelectCategory()">Select category</a>
+            </td>
+            <td>
+                <label for="filter_discount">In reducere</label>
+            </td>
+            <td>
+                <input type="checkbox" name="filter_discount" id="filter_discount" onchange="loadProducts(1);" />
+            </td>
+            <td>
+                <label for="filter_in_stock">In stoc</label>
+            </td>
+            <td>
+                <input type="checkbox" name="filter_in_stock" id="filter_in_stock" onchange="loadProducts(1);" />
+            </td>
+            <td>
+                <label for="search_product_code">Cod produs: </label>
+            </td>
+            <td>
+                <input type="text" name="search_product_code" id="search_product_code" />
+            </td>
+        </tr>
+    </table>
+</fieldset>
+<fieldset width="100%">
+    <legend>Produse</legend>
+    <table class="fancy_table" width="100%">
+        <thead>
+        <tr>
+            <th width="70px">Code</th>
+            <th>Name</th>
+            <th width="70px">Price</th>
+            <th width="70px">In stock</th>
+            <th width="70px">Available to order</th>
+        </tr>
+        </thead>
+        <tbody id="product_table_data">
+        <tr>
+            <td>123</td>
+            <td>some name</td>
+            <td>239.23</td>
+            <td>y</td>
+            <td>n</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table id="testGrid" width="100%">
+        <thead>
+        <tr>
+            <th width="70px">Code</th>
+            <th>Name</th>
+            <th width="70px">Price</th>
+            <th width="70px">In stock</th>
+            <th width="70px">Available to order</th>
+        </tr>
+        </thead>
+        <tbody id="product_table_data">
+        <tr>
+            <td>123</td>
+            <td>some name</td>
+            <td>239.23</td>
+            <td>y</td>
+            <td>n</td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="button" id="addProductButton" value="Adauga Produs" onclick="$('#add_product_div').dialog('open')" />
+</fieldset>
+
+<div id="categorySelect"></div>
+
 <script>
-    baseUri = '<?=base_url();?>';
-</script>
-<style>
-    .styleTable { border-collapse: separate; }
-    .styleTable TD { font-weight: normal !important; padding: .4em; border-top-width: 0px !important; }
-    .styleTable TH { text-align: center; padding: .8em .4em; }
-    .styleTable TD.first, .styleTable TH.first { border-left-width: 0px !important; }
-</style>
-<script>
-    (function ($) {
-        $.fn.styleTable = function (options) {
-            var defaults = {
-                css: 'styleTable ui-widget ui-widget-content ui-corner-all'
-            };
-            options = $.extend(defaults, options);
 
-            return this.each(function () {
-
-                input = $(this);
-                input.addClass(options.css);
-
-                input.find("tr").live('mouseover mouseout', function (event) {
-                    if (event.type == 'mouseover') {
-                        $(this).children("td").addClass("ui-state-hover");
-                    } else {
-                        $(this).children("td").removeClass("ui-state-hover");
-                    }
-                });
-
-                input.find("th").addClass("ui-state-default");
-                input.find("td").addClass("ui-widget-content");
-
-                input.find("tr").each(function () {
-                    $(this).children("td:not(:first)").addClass("first");
-                    $(this).children("th:not(:first)").addClass("first");
-                });
-            });
-        };
-    })(jQuery);
+    var selectCategory = function(categoryId) {
+        // select the parent category
+        alert('selected category: '+categoryId);
+        $('#category_select_dialog').dialog('close');
+    }
 
     function loadProducts() {
-//        product_table_data
         makeJsonRpcCall('products', 'getProducts', {'limit':10, 'offset':0, 'filters':null}, function (data) {
             if (data.error != null) {
                 alert(data.error.message);
@@ -49,8 +95,6 @@
                 $(data.result).each(function (index, item) {
                     addProductRow(item);
                 });
-                $("#myTable").styleTable();
-//                alert(data.result);
             }
         });
     }
@@ -66,23 +110,16 @@
     }
 
     $(document).ready(function () {
-        $("#myTable").styleTable();
+        baseUri = '<?=base_url();?>';
         loadProducts();
-    });
-</script>
+        $('#addProductButton').button();
+        $('#categorySelect').load('<?=site_url('admin/categories_new/select')?>');
 
-<div class="ui-grid-header ui-widget-header ui-corner-top" style="padding: 5px">jQuery UI Grid Header</div>
-<table id="myTable" width="100%" class="">
-    <thead>
-    <tr>
-        <th width="70px">Code</th>
-        <th>Name</th>
-        <th width="70px">Price</th>
-        <th width="70px">In stock</th>
-        <th width="70px">Available to order</th>
-    </tr>
-    </thead>
-    <tbody id="product_table_data">
-    </tbody>
-</table>
-<div class="ui-grid-header ui-widget-header ui-corner-bottom" style="padding: 5px">jQuery UI Grid Header</div>
+        $("#testGrid").dataTable({
+                    "bJQueryUI": true,
+                    "sPaginationType": "full_numbers"
+                });
+
+    });
+
+</script>

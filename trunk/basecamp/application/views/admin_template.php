@@ -4,10 +4,10 @@
     <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
     <TITLE>Admin SHOP</TITLE>
     <link href="<?php echo base_url(); ?>css/admin.css" type="text/css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>css/table.css" type="text/css" rel="stylesheet" />
     <link type="text/css" href="<?php echo base_url(); ?>css/cupertino/jquery-ui-1.8.1.custom.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css//jquery.autocomplete.css" />
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css//highslide.css" />
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/jquery.autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/highslide.css" />
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/flexigrid.css" />
     <!--[if lt IE 7]>
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/highslide-ie6.css" />
     <![endif]-->
@@ -15,6 +15,8 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>js/ui/jquery-ui-1.8.1.custom.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.autocomplete.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>js/jsonrpc.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/utilities.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="<?=base_url()?>/js/highslide.js"></script>
     <script>
         baseUri = '<?=base_url();?>';
@@ -45,24 +47,23 @@
             </TD>
         </TR>
         <TR>
-            <TD valign="top" width="200" class="sideNav" style="padding-top: 40px;">
-                <UL class="ui-menu">
-                    <LI class="ui-menu-item ui-widget-header ui-corner-tr"><A href="<?php echo site_url("admin/reports"); ?>">Rapoarte</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/productReviews"); ?>">Administrare reviews</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/news"); ?>">Administrare noutati</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/categories"); ?>">Administrare categorii</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/categories_new"); ?>">Administrare categorii NEW</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/products"); ?>">Administrare produse</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/products_new"); ?>">Administrare produse NEW</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/productProperties"); ?>">Prioprietati produse</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/producers"); ?>">Producatori</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/orders"); ?>">Administrare comenzi</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/ptSettings"); ?>">Setari plata &amp; transport</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/languages"); ?>">Setari limbi</A></LI>
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/firm"); ?>">Detalii firma</A></LI>
-                    <!-- <LI><A href="<?php echo site_url("admin/users"); ?>">Administrare utilizatori</A></LI> -->
-                    <LI class="ui-menu-item ui-widget-header"><A href="<?php echo site_url("admin/clients"); ?>">Administrare clienti</A></LI>
-                    <LI class="ui-menu-item ui-widget-header ui-corner-br"><A href="<?php echo site_url("admin/banner"); ?>">Administrare banner</A></LI>
+            <TD valign="top" width="200" style="padding-top: 40px;">
+                <UL class="fancy_menu" style="list-style-type: none;">
+                    <LI><A href="<?php echo site_url("admin/reports"); ?>"><span class="ui-icon ui-icon-document" style="float:left"></span>Rapoarte</A></LI>
+                    <LI><A href="<?php echo site_url("admin/productReviews"); ?>"><span class="ui-icon ui-icon-comment" style="float:left"></span>Administrare reviews</A></LI>
+                    <LI><A href="<?php echo site_url("admin/news"); ?>"><span class="ui-icon ui-icon-document-b" style="float:left"></span>Administrare noutati</A></LI>
+                    <LI><A href="<?php echo site_url("admin/categories_new"); ?>"><span class="ui-icon ui-icon-folder-open" style="float:left"></span>Administrare categorii</A></LI>
+                    <LI><A href="<?php echo site_url("admin/products"); ?>"><span class="ui-icon ui-icon-tag" style="float:left"></span>Administrare produse</A></LI>
+                    <LI><A href="<?php echo site_url("admin/products_new"); ?>"><span class="ui-icon ui-icon-tag" style="float:left"></span>Administrare produse NEW</A></LI>
+                    <LI><A href="<?php echo site_url("admin/productProperties"); ?>"><span class="ui-icon ui-icon-gear" style="float:left"></span>Prioprietati produse</A></LI>
+                    <LI><A href="<?php echo site_url("admin/producers"); ?>"><span class="ui-icon ui-icon-person" style="float:left"></span>Producatori</A></LI>
+                    <LI><A href="<?php echo site_url("admin/orders"); ?>"><span class="ui-icon ui-icon-transferthick-e-w" style="float:left"></span>Administrare comenzi</A></LI>
+                    <LI><A href="<?php echo site_url("admin/ptSettings"); ?>"><span class="ui-icon ui-icon-calculator" style="float:left"></span>Setari plata &amp; transport</A></LI>
+                    <LI><A href="<?php echo site_url("admin/languages"); ?>"><span class="ui-icon ui-icon-flag" style="float:left"></span>Setari limbi</A></LI>
+                    <LI><A href="<?php echo site_url("admin/firm"); ?>"><span class="ui-icon ui-icon-suitcase" style="float:left"></span>Detalii firma</A></LI>
+                    <LI><A href="<?php echo site_url("admin/users"); ?>"><span class="ui-icon ui-icon-person" style="float:left"></span>Administrare utilizatori</A></LI>
+                    <LI><A href="<?php echo site_url("admin/clients"); ?>"><span class="ui-icon ui-icon-cart" style="float:left"></span>Administrare clienti</A></LI>
+                    <LI><A href="<?php echo site_url("admin/banner"); ?>"><span class="ui-icon ui-icon-image" style="float:left"></span>Administrare banner</A></LI>
                 </UL>
             </TD>
             <TD valign="top" style="padding-top: 40px;">
@@ -78,3 +79,6 @@
 </CENTER>
 </body>
 </html>
+<script>
+    applyJqueryStyle();
+</script>
