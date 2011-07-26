@@ -12,6 +12,7 @@
 
     function startSelectCategory() {
         $('#category_select_dialog').dialog('open');
+        $('#selectCategoryFilter').focus();
         searchCategory('');
     }
 

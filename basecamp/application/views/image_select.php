@@ -21,7 +21,7 @@
         $('#image_upload_iframe').attr('src', '<?=site_url('images/image_upload_form')?>/'+imageCategory);
         // load all images
         $('#image_select_dialog_images').empty();
-        makeJsonRpcCall('general', 'getImagesForCategory', imageCategory, function (data) {
+        makeJsonRpcCall('general', 'getImages', {"imageCategory": imageCategory}, function (data) {
             if (data.error != null) {
                 alert(data.error.message);
             } else {

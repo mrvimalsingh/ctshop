@@ -8,9 +8,7 @@
         <td valign="top" width="300px">
             <fieldset width="100%" class="ui-widget-content ui-corner-all">
                     <legend class="ui-corner-all ui-widget-header" style="padding: 5px;">Alege categoria pentru a modifica.</legend>
-                <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon" onclick="editCategory(0)">
-                    <span class="ui-icon ui-icon-plusthick"></span><span class="ui-button-text">Categorie Noua</span>
-                </button>
+                <button id="editCategoryButton" onclick="editCategory(0)">Categorie Noua</button>
                 <div id="categories_tree"></div>
             </fieldset>
         </td>
@@ -304,6 +302,7 @@
         $('#image_select_dialog').dialog('close');
     }
 
+    $('#editCategoryButton').button({icons:{primary:'ui-icon-plusthick'}});
     $('#categoryImageSelect').load('<?=site_url('images/ajax_select')?>');
     $('#categoryParentSelect').load('<?=site_url('admin/categories_new/select')?>');
 

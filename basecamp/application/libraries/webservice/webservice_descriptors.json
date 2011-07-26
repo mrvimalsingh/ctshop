@@ -117,7 +117,20 @@
         "id": "{{domain}}webservices/schema/general",
         "description": "Webservice that exposes the methods dealing with general stuff on the CT-Shop website instance",
         "location": "{{domain}}webservices/jsonrpc/general",
-        "version": "1.0"
+        "version": "1.0",
+        "handlerClass": "BGeneral",
+        "getImages": {
+            "type": "method",
+            "description": "Get image hashes for a particular image category",
+            "returns" : "boolean",
+            "params" : [
+                {
+                    "name": "imageCategory",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        }
     },
 
     "_comment3": "#################################################################################################################################",
