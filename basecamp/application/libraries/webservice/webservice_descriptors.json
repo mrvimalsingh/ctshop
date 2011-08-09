@@ -146,7 +146,42 @@
         "id": "{{domain}}webservices/schema/products",
         "description": "Webservice that exposes the methods dealing with products on the CT-Shop website instance",
         "location": "{{domain}}webservices/jsonrpc/products",
-        "version": "1.0"
+        "version": "1.0",
+        "handlerClass": "BProducts",
+        "getProducts": {
+            "type": "method",
+            "description": "Get products",
+            "returns" : "TODO: define product json model",
+            "params" : [
+                {
+                    "name": "offset",
+                    "type": "integer",
+                    "required": true
+                },
+                {
+                    "name": "count",
+                    "type": "integer",
+                    "required": true
+                },
+                {
+                    "name": "order_by",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "name": "order_dir",
+                    "type": "string",
+                    "options": ["asc", "desc"],
+                    "required": true
+                },
+                {
+                    "name": "filters",
+                    "type": "TODO: define filters",
+                    "options": ["asc", "desc"],
+                    "required": true
+                }
+            ]
+        }
     },
 
     "_comment5": "#################################################################################################################################",

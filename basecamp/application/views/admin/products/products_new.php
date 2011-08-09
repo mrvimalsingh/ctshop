@@ -43,34 +43,6 @@
         </tr>
         </thead>
         <tbody id="product_table_data">
-        <tr>
-            <td>123</td>
-            <td>some name</td>
-            <td>239.23</td>
-            <td>y</td>
-            <td>n</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table id="testGrid" width="100%">
-        <thead>
-        <tr>
-            <th width="70px">Code</th>
-            <th>Name</th>
-            <th width="70px">Price</th>
-            <th width="70px">In stock</th>
-            <th width="70px">Available to order</th>
-        </tr>
-        </thead>
-        <tbody id="product_table_data">
-        <tr>
-            <td>123</td>
-            <td>some name</td>
-            <td>239.23</td>
-            <td>y</td>
-            <td>n</td>
-        </tr>
         </tbody>
     </table>
     <input type="button" id="addProductButton" value="Adauga Produs" onclick="$('#add_product_div').dialog('open')" />
@@ -100,12 +72,29 @@
     }
 
     function addProductRow(product) {
+        addRow(
+                {
+                    "code": product.code,
+                    "name": product.name,
+                    "price": product.price,
+                    "in_stock": product.in_stock,
+                    "available_online": product.available_online
+                }
+        );
+//        $('#product_table_data').append("<tr>");
+//        $('#product_table_data').append("<td>"+product.code+"</td>");
+//        $('#product_table_data').append("<td>"+product.name+"</td>");
+//        $('#product_table_data').append("<td>"+product.price+"</td>");
+//        $('#product_table_data').append("<td>"+product.in_stock+"</td>");
+//        $('#product_table_data').append("<td>"+product.available_online+"</td>");
+//        $('#product_table_data').append("</tr>");
+    }
+
+    function addRow(data) {
         $('#product_table_data').append("<tr>");
-        $('#product_table_data').append("<td>"+product.code+"</td>");
-        $('#product_table_data').append("<td>"+product.name+"</td>");
-        $('#product_table_data').append("<td>"+product.price+"</td>");
-        $('#product_table_data').append("<td>"+product.in_stock+"</td>");
-        $('#product_table_data').append("<td>"+product.available_online+"</td>");
+        $.each(data, function(i, n){
+            $('#product_table_data').append("<td>"+n+"</td>");
+        });
         $('#product_table_data').append("</tr>");
     }
 
@@ -114,11 +103,6 @@
         loadProducts();
         $('#addProductButton').button();
         $('#categorySelect').load('<?=site_url('admin/categories_new/select')?>');
-
-        $("#testGrid").dataTable({
-                    "bJQueryUI": true,
-                    "sPaginationType": "full_numbers"
-                });
 
     });
 
