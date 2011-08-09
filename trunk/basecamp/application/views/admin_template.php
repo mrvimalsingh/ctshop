@@ -7,7 +7,6 @@
     <link type="text/css" href="<?php echo base_url(); ?>css/cupertino/jquery-ui-1.8.1.custom.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/jquery.autocomplete.css" />
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/highslide.css" />
-    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/flexigrid.css" />
     <!--[if lt IE 7]>
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/highslide-ie6.css" />
     <![endif]-->
