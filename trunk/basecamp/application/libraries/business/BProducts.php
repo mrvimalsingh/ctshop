@@ -9,6 +9,9 @@
  
 class BProducts {
 
+    var $errorCode = 0;
+    var $errorMessage = "";
+
     function getProduct($params) {
         $product = ProductModel::find_by_id($params);
         // GET ALL OTHER DETAILS...
